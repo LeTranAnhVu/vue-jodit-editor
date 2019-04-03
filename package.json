@@ -11,6 +11,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
     "jodit": "^3.2.44",
+    "jodit-vue": "^1.2.3",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7",
     "vue": "^2.6.6"

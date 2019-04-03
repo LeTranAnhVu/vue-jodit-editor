@@ -5,12 +5,11 @@
       <div class="row">
         <div class="col-md-6">
           <h3>Edit</h3>
-          <textarea id="editor" name="editor" @change="getText"></textarea>
-          <button class="mr-auto btn btn-outline-dark mt-2" @click="getText">Render</button>
+          <jodit-vue :config="opt" v-model="text"/>
         </div>
         <div class="col-md-6">
           <h3>Result</h3>
-          <article id="result"></article>
+          <article v-html="text"></article>
         </div>
       </div>
     </section>
@@ -19,34 +18,30 @@
 </template>
 
 <script>
-  import Jodit from 'jodit/build/jodit.min.js'
+  import 'jodit/build/jodit.min.css'
+  import JoditVue from 'jodit-vue'
 
   export default {
     name: 'app',
-    components: {},
+    components: {
+      JoditVue,
+    },
     data () {
       return {
         text: '',
-        o : {}
+        opt: {
+          'uploader': {
+            'insertImageAsBase64URI': true,
+            'toolbarButtonSize': 'large',
+            'direction': 'ltr',
+          },
+        },
       }
     },
     mounted () {
-      this.o = new Jodit('#editor', {
-        'uploader': {
-          'insertImageAsBase64URI': true,
-          'toolbarButtonSize': 'large',
-          'direction': 'ltr'
-        },
-      })
 
     },
-    methods: {
-      getText () {
-        const texto = this.o.getEditorValue();
-        let resHTML = this.$el.querySelector('#result');
-        resHTML.innerHTML =texto ;
-      },
-    },
+    methods: {},
   }
 </script>
 
@@ -64,8 +59,9 @@
   #editor {
     width: 70%;
   }
+
   #result {
-    border: 1px #ddd solid ;
+    border: 1px #ddd solid;
     min-height: 300px;
   }
 </style>
