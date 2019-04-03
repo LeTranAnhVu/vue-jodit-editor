@@ -5,11 +5,16 @@
       <div class="row">
         <div class="col-md-6">
           <h3>Edit</h3>
-          <jodit-vue :config="opt" v-model="text"/>
+          <jodit-vue
+              :config="opt"
+              v-model="text"
+              :extra-buttons="customButtons"
+          />
+          <button class="btn btn-outline-primary mt-3" @click="renderText">review</button>
         </div>
         <div class="col-md-6">
           <h3>Result</h3>
-          <article v-html="text"></article>
+          <article id="result"></article>
         </div>
       </div>
     </section>
@@ -36,12 +41,30 @@
             'direction': 'ltr',
           },
         },
+        customButtons: [
+          {
+            name: 'insertDate',
+            iconURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Shutdown_button.svg/1024px-Shutdown_button.svg.png',
+            exec: function (editor) {
+              // editor.selection.insertHTML('-----HI-----')
+              let elHtml = editor.selection.getHTML();
+              // convert to  code
+              console.log(elHtml)
+              editor.selection.insertHTML(`<pre class="blog-code">${elHtml}</pre>`)
+            },
+          },
+        ]
       }
     },
     mounted () {
 
     },
-    methods: {},
+    methods: {
+      renderText(){
+        let resEl = this.$el.querySelector('#result');
+        resEl.innerHTML = this.text;
+      }
+    },
   }
 </script>
 
@@ -63,5 +86,13 @@
   #result {
     border: 1px #ddd solid;
     min-height: 300px;
+  }
+  .blog-code{
+    display: block;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    height: auto;
+    font-weight: 700;
   }
 </style>
