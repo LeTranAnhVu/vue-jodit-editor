@@ -10,12 +10,14 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
+    "highlight.js": "^9.15.6",
     "jodit": "^3.2.44",
     "jodit-vue": "^1.2.3",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7",
     "vue": "^2.6.6",
-    "vue-code-highlight": "^0.7.0"
+    "vue-code-highlight": "^0.7.0",
+    "vue-highlight.js": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

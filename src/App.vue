@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-6">
           <h3>Result</h3>
-          <article id="result"></article>
+          <div id="result" v-html="result"></div>
         </div>
       </div>
     </section>
@@ -25,15 +25,17 @@
 <script>
   import 'jodit/build/jodit.min.css'
   import JoditVue from 'jodit-vue'
+  // import snippet from './components/snippet'
 
   export default {
     name: 'app',
     components: {
-      JoditVue,
+      JoditVue
     },
     data () {
       return {
         text: '',
+        result: '',
         opt: {
           'uploader': {
             'insertImageAsBase64URI': true,
@@ -44,26 +46,24 @@
         customButtons: [
           {
             name: 'insertDate',
-            iconURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Shutdown_button.svg/1024px-Shutdown_button.svg.png',
+            iconURL: 'http://simpleicon.com/wp-content/uploads/Code-Optimization.png',
             exec: function (editor) {
-              // editor.selection.insertHTML('-----HI-----')
-              let elHtml = editor.selection.getHTML();
+              let elHtml = editor.selection.getHTML()
               // convert to  code
-              console.log(elHtml)
-              editor.selection.insertHTML(`<pre class="blog-code">${elHtml}</pre>`)
+              editor.selection.insertHTML(`<pre class="blog-code"><code>${elHtml}</code></pre>`)
+
             },
           },
-        ]
+        ],
       }
     },
     mounted () {
 
     },
     methods: {
-      renderText(){
-        let resEl = this.$el.querySelector('#result');
-        resEl.innerHTML = this.text;
-      }
+      renderText () {
+        this.result = this.text;
+      },
     },
   }
 </script>
@@ -87,12 +87,16 @@
     border: 1px #ddd solid;
     min-height: 300px;
   }
-  .blog-code{
+
+  .blog-code {
     display: block;
-    background: #333;
-    color: #fff;
+    background: #444;
+    color: #ddd;
     padding: 20px;
     height: auto;
     font-weight: 700;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
   }
 </style>
